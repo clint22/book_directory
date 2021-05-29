@@ -2,11 +2,14 @@ const express = require('express')
 const app = express()
 const port = 5000
 
-app.get('/', (req, res) => {
+const books = require('./routes/books')
 
-    res.send('Hello World!')
+// parse form data 
+app.use(express.urlencoded({extended: false}))
+// parse json 
+app.use(express.json())
 
-})
+app.use('/api/books', books)
 
 app.listen(port, ()=> {
     console.log('App listening')
